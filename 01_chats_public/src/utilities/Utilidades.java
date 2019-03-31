@@ -25,7 +25,7 @@ public class Utilidades {
 		}
 		Properties prop=new Properties();
 		Connection con=null;
-		String parent="D:/GitMe/NgGit/01_chats_public";
+		String parent="D:/GitMe/public/01_chats_public";
 		File datas=Paths.get(parent,"/src/utilities/conexion.properties").toFile();
 		try(FileInputStream fis=new FileInputStream(datas);){
 			prop.load(fis);
