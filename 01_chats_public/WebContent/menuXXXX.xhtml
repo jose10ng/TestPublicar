@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+<h:head>
+
+<style type="text/css">
+	table,tr,th,td,button{border-radius: 5px;border-color: red}
+	td{color: white;background: green}
+	a,button{color: orange;background: pink}
+</style>
+
+</h:head> 
+<h:body>
+	<c:choose>
+		<c:when test="#{!empty sessionScope.loginBean}">
+			<h:link value="Ingresar" outcome="ingreso"/><br/><br/>
+			<h:link value="Extracción" outcome="extraer"/><br/><br/>
+			<h:link value="Transferencia" outcome="transferencia"/><br/><br/>
+			<h:form>
+				<h:commandLink value="Movimientos" action="#{listaMovimientosBean.listaGen()}"/><br/><br/><br/>
+			</h:form>
+			<h:form>
+				<h:commandLink value="Salir" action="#{salirBean.salida()}"/><br/><br/>
+			</h:form>
+		</c:when>
+		<c:otherwise>
+			<h1>Su sessión ha experirado</h1><br/><br/>
+			<h:link value="Volver" outcome="inicio"/>			
+		</c:otherwise>
+	</c:choose>
+</h:body> 
+</html>

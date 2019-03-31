@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	<style type="text/css">
+		a,button{
+			color: yellow;
+			background: blue;			
+		}
+		
+		#mens,#mens2,#mens3{
+			position:relative;
+			margin-left:30%;
+			color: red;
+			font-style: italic;
+			font-family: cursive;
+			font-size: 20px;
+		}
+		
+		#link1,#link2{
+			color: blue;
+			font-style: normal;
+			font-family: sans-serif;
+			font-size: 20px;
+			background: pink;
+		}
+		
+		.tr1{
+			background: #ffffb0;
+			max-width: 100%;
+		}
+		
+		.tr2{
+			background: #ffceff;
+			max-width: 100%;
+		}
+		
+		.tdVacio{
+			background: #c6ffb3;
+			width: 5%;
+		}
+		
+		.td1{
+			font-size: 40px;
+			font: bold;
+			color:#000099;
+			padding-left: 10px;
+			width: 70%;				
+		}
+		
+		.td2{
+			font-size: 40px;
+			font: bold;
+			color:#663300;
+			padding-left: 10px;
+			width: 90%;
+			border-bottom-left-radius: 30px;
+			border-top-left-radius: 30px;					
+		}
+		
+		.time1{
+			font-size: 10px;
+			color:#978f98;
+			padding-left: 3%;
+			padding-top: 10%;
+			width: 10%;
+			border-bottom-right-radius: 30px;
+			border-top-right-radius: 30px;			
+		}
+		
+		.user1{
+			font-size: 20px;
+			font: bold;
+			padding-left: 3%;
+			width: 15%;
+			border-bottom-left-radius: 30px;
+			border-top-left-radius: 30px;		
+		}
+		
+		#msj{
+			width: 70%;
+			border-radius: 50px;
+			padding-left: 20px;
+			font: bold;
+			font-size: 40px;						
+		}
+		
+		.headerx{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			height:260px;
+			overflow: hidden;								
+		}
+		
+		.conten{
+			max-width: 78%;
+			position: absolute;
+			bottom: 120px;
+			overflow: auto; 
+			flex-grow: 1;
+		}
+		
+		.footer{
+			position: absolute;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			height:120px;
+			overflow: hidden;
+			max-width: 100%;									
+		}
+		
+		.inclu{
+			max-width: 60%;
+			margin-left: 40%;
+		}
+		
+		#imag{
+			position: absolute;
+			margin-left:80%;
+		}
+		
+	</style>
+	
+	<script type="text/javascript">
+		var ws;
+		var user;
+		
+		function conectar() {
+			var uri="ws://192.168.137.1:8080/01_chats/chat";
+			ws=new WebSocket(uri); //establece conexión con el server
+			ws.onopen=function(){
+				console.log("conexión con ws iniciada");
+			}
+			
+			ws.onmessage=function(evt){
+				var obj=JSON.parse(evt.data);
+				
+				/*var newTabla=document.getElementById("newTabla");
+				var row1, row2, row3, row4;
+				var cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8;*/
+				
+				var tabla="";
+				var tr;
+				var td;
+				var trL, tdL;
+				if(user!=obj.user){
+					/*row3=newTabla.insertRow();
+					cell4=row3.insertCell();
+					cell5=row3.insertCell();
+					cell6=row3.insertCell();
+					cell7=row3.insertCell();
+					cell4.innerHTML="&nbsp;";
+					cell5.innerHTML=obj.user;
+					cell6.innerHTML=obj.msg;
+					cell7.innerHTML=obj.date1;					
+					row4=newTabla.insertRow();
+					cell8=row4.insertCell();
+					cell8.innerHTML="&nbsp;";
+					row3.setAttribute("class","tr1");
+					cell4.setAttribute("class","tdVacio");
+					cell5.setAttribute("class","user1");
+					cell6.setAttribute("class","td1");					
+					cell7.setAttribute("class","time1");*/
+					
+					tabla+="<table>";					
+					tabla+="<tr>";					
+					tabla+="<td>&nbsp;</td>";
+					tabla+="<td>"+obj.user+" dice:</td><td>"+obj.msg+"</td><td>"+obj.date1+"</td>";
+					tabla+="</tr>";					
+					tabla+="<tr><td>&nbsp;</td></tr>";			
+					tabla+="</table>";
+					document.getElementById("tabla").innerHTML+=tabla;
+					tr=document.getElementsByTagName("tr");
+					td=document.getElementsByTagName("td");
+					trL=tr.length;
+					tdL=td.length;
+					tr[trL-2].setAttribute("class","tr1");
+					td[tdL-5].setAttribute("class","tdVacio");
+					td[tdL-4].setAttribute("class","user1");
+					td[tdL-3].setAttribute("class","td1");					
+					td[tdL-2].setAttribute("class","time1");
+				}else{
+					/*row1=newTabla.insertRow();
+					cell1=row1.insertCell();
+					cell2=row1.insertCell();
+					cell1.innerHTML=obj.msg;
+					cell2.innerHTML=obj.date1;
+					row2=newTabla.insertRow();
+					cell3=row2.insertCell();
+					cell3.innerHTML="&nbsp;";
+					row1.setAttribute("class","tr2");
+					cell1.setAttribute("class","td2");
+					cell2.setAttribute("class","time1");*/
+										
+					tabla+="<table>";					
+					tabla+="<tr>";
+					tabla+="<td>"+obj.msg+"</td><td>"+obj.date1+"</td>";
+					tabla+="</tr>";					
+					tabla+="<tr><td>&nbsp;</td></tr>";
+					tabla+="</table>";
+					document.getElementById("tabla").innerHTML+=tabla;
+					tr=document.getElementsByTagName("tr");
+					td=document.getElementsByTagName("td");
+					trL=tr.length;
+					tdL=td.length;
+					tr[trL-2].setAttribute("class","tr2");
+					td[tdL-3].setAttribute("class","td2");
+					td[tdL-2].setAttribute("class","time1");				
+				}
+				
+			}
+			
+			ws.onclose=function(){
+				console.log("conexión con ws cerrada");
+			}
+			
+			ws.error=function(){
+				console.log("error comunicación");
+			}
+			
+		}
+		
+		function enviar(usuario) {
+			user=usuario;
+			var obj={"user":usuario,"msg":document.getElementById("msj").value};
+			var msj=JSON.stringify(obj);
+			ws.send(msj);//envío de dato por el canal
+			document.getElementById("msj").focus();
+			document.getElementById("msj").value="";
+		}
+		
+		function cerrar() {
+			ws.close();
+		}
+		
+		function send1(e,usuario) {
+			var key=e.keyCode||e.which;//which for FireFox only
+			if(key==13){
+				e.preventDefault();
+				enviar(usuario);
+			}
+		}
+	
+	</script>
+</h:head>
+<h:body onload="conectar();"  style="background:#c6ffb3">
+	
+	<h:graphicImage url="/images/gato.jpg" alt="whathever" class="img-circle" height="200px" width="250px" id="imag"/>
+	
+	<div class="headerx"></div>
+	
+	<!-- <table class="conten" id="newTabla">		
+	</table> -->
+	
+	<div class="conten" id="tabla">		
+	</div>
+			
+	<div class="footer">			
+		<textarea id="msj" placeholder="Escriba aquí" onkeypress="send1(event,'#{loginBean.usuario}');"/>		
+		<input type="button" value="Enviar" onclick="enviar('#{loginBean.usuario}');" class="btn btn-primary btn-lg" style="margin-top:-5%"/>
+				<h:form>
+			<h:commandButton value="Desconectar" onclick="cerrar();" action="#{salirBean.cerrarSession()}"
+							 class="btn btn-primary btn-info" style="margin-left:85%;margin-top:-8%"/>
+		</h:form>	
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsp="http://java.sun.com/jsp/jstl/core"> 
+
+<h:head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+	
+	<script type="text/javascript">
+	//<![CDATA[
+		function comprobar() {
+			var c=document.getElementById("caja1").value;
+			var p=-9;
+			var d=new Date();
+			if(c.length<=0){
+				alert("Debes meter algo");
+				return false;
+			}else{
+				return true;
+			}
+		}
+	//]]>
+	</script>
+	<style type="text/css">
+		a,button{
+			color: yellow;
+			background: blue;
+		}
+		
+		#mens1,#mens2,#mens3{
+			position:relative;
+			margin-left:30%;
+			color: red;
+			font-style: italic;
+			font-family: cursive;
+			font-size: 20px;
+			font: bold;
+		}
+		
+		#link1,#link2{
+			color: blue;
+			font-style: normal;
+			font-family: sans-serif;
+			font-size: 60px;
+			background: #c6ffb3;
+		}
+		
+		#contai{
+			max-width: 900px;
+		}
+		
+	</style>
+</h:head> 
+<h:body style="background:#c6ffb3">
+	<ui:include src="/head.xhtml"/>
+	<div class="container" id="contai">
+		<h:form prependId="false" onsubmit="return comprobar();">
+			<div class="form-group">
+				<label for="caja1">Usuario:</label>
+				<h:inputText class="form-control input-lg" id="caja1" value="#{loginBean.usuario}" required="true" requiredMessage="Falta usuario"/>
+				<label id="mens2"><h:message for="caja1"/></label>
+			</div>
+			<div class="form-group">
+				<label for="caja2">Contraseña:</label>
+				<h:inputSecret class="form-control input-lg" id="caja2" value="#{loginBean.password}" required="true" requiredMessage="Falta contraseña">
+					<f:validateLength minimum="3"/>
+				</h:inputSecret><label id="mens3"><h:message for="caja2"/></label>
+			</div>
+			<h:commandButton id="entra" class="btn btn-primary btn-lg" value="Entrar" action="#{loginBean.login}" rendered="#{loginBean.control!=1}">
+				<f:ajax render="@form" execute="caja1 caja2" disabled="#{loginBean.control==0}"/>							
+			</h:commandButton>							
+			<br/>
+			<h:panelGroup id="mens">
+				<label id="mens1">#{loginBean.mens}</label>
+			</h:panelGroup><br/>
+			<h:panelGroup id="dupli">
+				<h:commandButton class="btn btn-primary btn-lg" value="¿Duplica Sesión?" action="#{loginBean.loginSessionDuplicada()}"
+								 rendered="#{loginBean.control==1}">
+					<f:ajax render="@form" execute="@form" disabled="#{loginBean.control==1}"/>
+				</h:commandButton>
+			</h:panelGroup>
+		</h:form><br/><br/>
+		<h:link id="link2" value="Volver" outcome="inicio"/>
+	</div>
+</h:body> 
+</html>
+			

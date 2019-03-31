@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<style type="text/css">
+		table,tr,th{
+			border-color: red;
+			border-radius: 5px;
+		}
+		
+		#link1,#link2{
+			color: blue;
+			font-style: normal;
+			font-family: sans-serif;
+			font-size: 60px;
+			background: #c6ffb3;
+		}
+		
+		#contai{
+			max-width: 600px;
+		}
+		
+	</style>
+</h:head> 
+<h:body style="background:#c6ffb3">
+	<ui:include src="/head.xhtml"/>
+	<div class="container" id="contai">
+		<h:form>
+			<h1>Formulario de Registro</h1><br/>
+			<div class="form-group">
+				<label for="us">Usuario:</label>
+				<h:inputText class="form-control input-lg" value="#{registroBean.usuario}" id="us" required="true"/>
+				<h:message for="us" id="use" style="color:red;font-size:30px"/>
+				<h:commandButton class="btn btn-primary btn-sm" action="#{registroBean.comprobar()}" value="Comprobar">
+					<f:ajax render="ocupacion" execute="us"/>
+				</h:commandButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:panelGroup id="ocupacion">
+						<h:outputText value="#{registroBean.ocupado}" id="ocupa" style="color:red;font-size:30px"/>
+				</h:panelGroup>
+			</div>
+			<div class="form-group">
+				<label for="psw1">Contraseña:</label>
+				<h:inputText class="form-control input-lg" id="psw1" value="#{registroBean.password}" required="true"/>
+				<h:message for="psw1" id="ps1" style="color:red;font-size:30px"/>
+			</div>
+			<div class="form-group">
+				<label for="psw2">Repetir Contraseña:</label>
+				<h:inputText class="form-control input-lg" id="psw2" required="true">
+					<f:validator validatorId="vPsw"/>
+				</h:inputText><h:message id="mens" for="psw2" style="color:red;font-size:30px"/>
+			</div>
+			<div class="form-group">
+				<label for="nombre">Nombre:</label>
+				<h:inputText class="form-control input-lg" id="nombre" value="#{registroBean.nombre}" required="true">
+					<f:validator validatorId="vNombre"/>
+				</h:inputText><h:message id="mens2" for="nombre" style="color:red;font-size:30px"/>
+			</div>
+			<div class="form-group">
+				<label for="edad">Edad:</label>
+				<h:inputText class="form-control input-lg" id="edad" value="#{registroBean.edad}" required="true"/>
+				<h:message for="edad" id="eda" style="color:red;font-size:30px"/>
+			</div>
+			<h:commandButton class="btn btn-primary btn-lg" value="Guardar" action="#{registroBean.registro()}"/>
+			<h:outputText value="#{registroBean.mensError}" id="error" style="color:red;font-size:30px"/>
+		</h:form><br/><br/>
+		<h:link id="link1" value="Volver" outcome="inicio"/>
+	</div>
+</h:body> 
+</html>
