@@ -12,6 +12,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Properties;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -25,8 +29,9 @@ public class Utilidades {
 		}
 		Properties prop=new Properties();
 		Connection con=null;
-		String parent="D:/GitMe/public/01_chats_public";
-		File datas=Paths.get(parent,"/src/utilities/conexion.properties").toFile();
+		ExternalContext ec=FacesContext.getCurrentInstance().getExternalContext();
+		ServletContext sc=(ServletContext) ec.getContext();
+		File datas=Paths.get(sc.getRealPath(sc.getInitParameter("conexionDB"))).toFile();
 		try(FileInputStream fis=new FileInputStream(datas);){
 			prop.load(fis);
 			con=DriverManager.getConnection(prop.getProperty("url"), prop);
