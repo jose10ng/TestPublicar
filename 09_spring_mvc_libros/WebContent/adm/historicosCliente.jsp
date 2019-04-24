@@ -52,15 +52,39 @@
 				return true;
 			}			
 		}
-	</script>	
+	</script>
+	<style type="text/css">		
+		.contenedor{
+			max-width: 40%;
+		}
+		table,tr,th,td{
+			border-radius: 20px;border-color: red
+		}
+		
+		td{
+			color: white;background: blue
+		}
+		table{
+			width: 90%
+		}
+	</style>
 </head>
 <body>
-	<h1 align="center">Lista de Históricos de un clientes</h1><br/><br/>
-	Id del Cliente para obtener sus históricos: <input type="number" name="idCliente" id="idCliente"/><br/><br/>
-	Confirme contraseña del Administrador: <input type="password" name="pwdadmin" id="pwdadmin"/><h4 align="center" id="mensaje"></h4><br/><br/>
+	<div  class="container contenedor">
+		<h1 align="center"><span class="label label-primary">Lista de Históricos de un clientes</span></h1><br/><br/>
+		<div class="form-group">
+			<label for="idCliente">Id del Cliente para obtener sus históricos: </label>
+			<input type="number" name="idCliente" id="idCliente" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label for="idCliente">Confirme contraseña del Administrador: </label>
+			<input type="password" name="pwdadmin" id="pwdadmin" class="form-control"/>
+		</div>
+		<h3><span class="label label-danger" id="mensaje"></span></h3>
+		<input type="button" onclick="lista();" value="Listar" class="btn btn-primary btn-md"/><br/><br/><br/>	
+		<h3><span class="label label-info"><a href="toMenuAdmin">Volver</a></span></h3>
+	</div><br/><br/>
 	<div id="lista">
-	</div>
-	<input type="button" onclick="lista();" value="Listar"/><br/><br/><br/>	
-	<a href="toMenuAdmin">Volver</a>
+	</div><br/>
 </body>
 </html>

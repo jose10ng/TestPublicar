@@ -28,17 +28,17 @@ public class Cesta extends Herramientas {
 	@Autowired
 	private ServiceLibros service;
 	
-	private Cliente c;
-	private List<LibroDto> cesta;
+	/*private Cliente c;
+	private List<LibroDto> cesta;*/
 	
 	@GetMapping("/agregar")
 	public void agregar(@RequestParam("isbn")String isbn, HttpSession session, HttpServletResponse response) throws IOException {
 		response.setContentType("text/plain");
 		PrintWriter out=response.getWriter();
 		int idLibro=Integer.parseInt(isbn);
-		c=(Cliente) session.getAttribute("cliente");
+		Cliente c=(Cliente) session.getAttribute("cliente");
 		if(c!=null) {
-			cesta=(List<LibroDto>) session.getAttribute(c.getIdCliente()+c.getUsuario());
+			List<LibroDto> cesta=(List<LibroDto>) session.getAttribute(c.getIdCliente()+c.getUsuario());
 			if(cesta==null) {
 				cesta=new ArrayList<>();
 				cesta.add(service.buscarLibroDto(idLibro));
@@ -59,13 +59,12 @@ public class Cesta extends Herramientas {
 		response.setContentType("text/plain");
 		PrintWriter out=response.getWriter();		
 		int p=Integer.parseInt(pos);
-		c=(Cliente) session.getAttribute("cliente");
+		Cliente c=(Cliente) session.getAttribute("cliente");
 		if(c!=null) {
-			cesta=(List<LibroDto>) session.getAttribute(c.getIdCliente()+c.getUsuario());
+			List<LibroDto> cesta=(List<LibroDto>) session.getAttribute(c.getIdCliente()+c.getUsuario());
 			if(cesta!=null&&cesta.size()!=0) {
 				cesta.remove(p);
-			}
-			session.setAttribute(c.getIdCliente()+c.getUsuario(), cesta);		
+			}		
 			out.println(jsonLibroDtos(cesta));
 		}else {
 			JSONObject obj=new JSONObject();
@@ -76,8 +75,8 @@ public class Cesta extends Herramientas {
 	
 	@GetMapping("/inicio")
 	public void inicio(HttpSession session, HttpServletResponse response) throws IOException {
-		c=(Cliente) session.getAttribute("cliente");
-		cesta=(List<LibroDto>) session.getAttribute(c.getIdCliente()+c.getUsuario());
+		Cliente c=(Cliente) session.getAttribute("cliente");
+		List<LibroDto> cesta=(List<LibroDto>) session.getAttribute(c.getIdCliente()+c.getUsuario());
 		response.setContentType("text/plain");
 		PrintWriter out=response.getWriter();
 		if(cesta!=null) {

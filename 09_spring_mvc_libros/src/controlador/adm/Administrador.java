@@ -36,7 +36,7 @@ public class Administrador extends Herramientas {
 		PrintWriter out=response.getWriter();
 		String admin=(String) session.getAttribute("admin");
 		if(admin.equals(encriptar(pwdadmin))) {
-			if(esAdecuado(idCliente)&&esAdecuado(telefono)) {
+			if(esAdecuado(idCliente)) {
 				int id=Integer.parseInt(idCliente);
 				if(service.modificarCliente(id, parsear(usuario, password, email, telefono))) {
 					out.println("Modificación realizada con ÉXITO");
@@ -44,7 +44,7 @@ public class Administrador extends Herramientas {
 					out.println("Id de Cliente incorrecto o ha habido un error");
 				}
 			}else {
-				out.println("El Id de Cliente y Tel deben ser numéricos, no estar vacíos o no pasarse de rango");
+				out.println("El Id de Cliente debe ser numérico, no estar vacío o no pasarse de rango");
 			}
 		}else {
 			if(pwdadmin.isEmpty()) {

@@ -5,12 +5,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import entidades.Cliente;
-import entidades.Libro;
 import entidades.Venta;
 
 @Repository("daoVentasImpl")
@@ -20,9 +19,11 @@ public class DaoVentasImpl implements DaoVentas {
 	private EntityManager em;
 	
 	@Override
-	public void alta(Cliente c, Libro l) {
-		c.getLibros().add(l);
-		em.merge(c);
+	public void alta(int idCliente, int isbn) {
+		Venta v=new Venta();
+		v.setIdCliente(idCliente);
+		v.setIdLibro(isbn);
+		em.persist(v);
 	}
 	
 	@Override
@@ -39,14 +40,18 @@ public class DaoVentasImpl implements DaoVentas {
 
 	@Override
 	public List<Venta> listaVentasDeUnCliente(int idCliente) {
-		// TODO Auto-generated method stub
-		return null;
+		String jpql="select v from Venta v where v.idCliente=?1";
+		Query q=em.createQuery(jpql, Venta.class);
+		q.setParameter(1, idCliente);
+		return q.getResultList();
 	}
 
 	@Override
 	public List<Venta> listaVentasDeUnLibro(int idLibro) {
-		// TODO Auto-generated method stub
-		return null;
+		String jpql="select v from Venta v where v.idLibro=?1";
+		Query q=em.createQuery(jpql, Venta.class);
+		q.setParameter(1, idLibro);
+		return q.getResultList();
 	}
 
 	@Override

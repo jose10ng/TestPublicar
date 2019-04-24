@@ -229,14 +229,12 @@ public class ServiceLibrosImpl extends MapperADtos implements ServiceLibros {
 
 	@Override
 	public List<Venta> listaVentasDeUnCliente(int idCliente) {
-		// TODO Auto-generated method stub
-		return null;
+		return ventas.listaVentasDeUnCliente(idCliente);
 	}
 
 	@Override
 	public List<Venta> listaVentasDeUnLibro(int idLibro) {
-		// TODO Auto-generated method stub
-		return null;
+		return ventas.listaVentasDeUnLibro(idLibro);
 	}
 
 	@Override
@@ -272,8 +270,7 @@ public class ServiceLibrosImpl extends MapperADtos implements ServiceLibros {
 			if(!libros.isEmpty()) {
 				r=libros.stream().allMatch(l->obtenerEnt(l)!=null);
 				if(r) {
-					Cliente cliente=clientes.buscar(c.getIdCliente());
-					libros.forEach(l->ventas.alta(cliente, obtenerEnt(l)));				
+					libros.forEach(l->ventas.alta(c.getIdCliente(), l.getIsbn()));				
 					double total=libros.stream().mapToDouble(l->l.getPrecio()).sum();
 					Historico h=new Historico();
 					h.setCliente(c);

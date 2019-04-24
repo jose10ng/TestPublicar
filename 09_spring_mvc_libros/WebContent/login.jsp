@@ -3,17 +3,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Insert title here</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 </head>
 <body>
-	<form action="login" method="post">
-		USUARIO <input type="text" name="usuario"><br/>
-		PASSWORD <input type="password" name="password"><br/><br/>
-		<input type="submit" value="Entrar">
-	</form><br/><br/><br/><br/>
-	<h1 align="center">${requestScope.mensaje}</h1>
-	<h1 align="center">${requestScope.registroOK}</h1><br/><br/>
-	<a href="toMenu">Volver</a>	
+	<h1 align="center"><span class="label label-primary">Login del Administrador</span></h1><br/><br/><br/>
+	<div class="container">
+		<form action="login" method="post">
+			<div class="form-group">
+				<label for="usuario">Usuario: </label>
+				<input type="text" name="usuario" class="form-control"/><br/>
+			</div>
+			<div class="form-group">
+				<label for="password">Contraseña: </label>
+				<input type="password" name="password" class="form-control"/><br/><br/>
+			</div>
+			<input type="submit" value="Entrar" class="btn btn-primary btn-md">
+		</form><br/>
+		<h3>
+			<span class="label label-danger">${requestScope.mensaje}</span><br/>
+			<span class="label label-danger">${requestScope.registroOK}</span><br/><br/>
+			<span class="label label-info"><a href="toMenu">Volver</a></span>
+		</h3>
+	</div>
 </body>
 </html>

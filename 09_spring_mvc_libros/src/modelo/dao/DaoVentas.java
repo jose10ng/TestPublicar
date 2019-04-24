@@ -14,6 +14,6 @@ public interface DaoVentas {
 	List<Venta> listaVentasDeUnCliente(int idCliente);
 	List<Venta> listaVentasDeUnLibro(int idLibro);
 	List<Venta> listaVentasEntreFechas(Date ini,Date fin);
-	void alta(Cliente c, Libro l);
+	void alta(int idCliente, int isbn);
 	
 }

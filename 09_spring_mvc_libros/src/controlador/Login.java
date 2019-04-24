@@ -30,6 +30,8 @@ public class Login extends Herramientas {
 		if(c!=null) {
 			session.setAttribute("cliente", c);
 			request.setAttribute("temas", service.listaTemasDto());
+			//service.listaVentasDeUnCliente(c.getIdCliente()).forEach(v->System.out.println("Ventas del cliente "+c.getUsuario()+" : "+v.getIdVEnta()));
+			//service.listaVentasDeUnLibro(888).forEach(v->System.out.println("Ventas del libro 888 "+v.getIdVEnta()));
 			return "temas";
 		}else {
 			if(usuario.isEmpty()||password.isEmpty()) {

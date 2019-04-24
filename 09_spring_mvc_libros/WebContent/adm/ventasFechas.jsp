@@ -19,7 +19,7 @@
 			var fin=$("#fin").val();
 			var pwdadmin=$("#pwdadmin").val();
 			$.post("ventasFecha",{"ini":ini,"fin":fin,"pwdadmin":pwdadmin},function(d,s){
-				alert(d);
+				//alert(d);
 				var obj=JSON.parse(d);
 				if(obj.error=="error"){
 					$("#lista").html("<h2 align='center'>"+obj.mensaje+"</h2>");
@@ -44,16 +44,41 @@
 			});
 		}
 	</script>
+	<style type="text/css">		
+		.contenedor{
+			max-width: 40%;
+		}
+		table,tr,th,td{
+			border-radius: 20px;border-color: red
+		}
+		
+		td{
+			color: white;background: blue
+		}
+		table{
+			width: 90%
+		}
+	</style>
 </head>
 <body>
-	<h1 align="center">Lista de Ventas entre fechas</h1><br/><br/><br/>
-	Fecha inicio: <input type="date" name="ini" id="ini"/><br/><br/>
-	Fecha fin: <input type="date" name="fin" id="fin"/><br/><br/>
-	Confirme contraseña del Administrador: <input type="password" name="pwdadmin" id="pwdadmin"/><br/><br/>
+	<h1 align="center"><span class="label label-primary">Lista de Ventas entre fechas</span></h1><br/><br/><br/>
+	<div class="container contenedor">
+		<div class="form-group">
+			<label for="ini">Fecha inicio: </label>
+			<input type="date" name="ini" id="ini" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label for="fin">Fecha fin: </label>
+			<input type="date" name="fin" id="fin" class="form-control"/>
+		</div><br/>
+		<div class="form-group">
+			<label for="pwdadmin">Confirme contraseña del Administrador: </label>
+			<input type="password" name="pwdadmin" id="pwdadmin" class="form-control"/>
+		</div><br/>
+		<input type="button" onclick="lista();" value="Listar" class="btn btn-info btn-md"/><br/><br/>		
+		<h3><span class="label label-info"><a href="toMenuAdmin">Volver</a></span></h3>
+	</div><br/><br/>
 	<div id="lista">
-	</div>
-	<input type="button" onclick="lista();" value="Listar"/><br/><br/><br/>
-	
-	<a href="toMenuAdmin">Volver</a>
+	</div><br/>
 </body>
 </html>

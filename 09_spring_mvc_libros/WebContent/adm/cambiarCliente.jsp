@@ -64,19 +64,40 @@
 			return telefonoNum()&&idClienteFueraRango();
 		}
 	</script>
+	<style type="text/css">		
+		.contenedor{
+			max-width: 40%;
+		}
+	</style>
 </head>
 <body>
-	<h1 align="center">Modificaciones a clientes</h1><br/><br/>
-	Id del Cliente al que se le realizará los cambios: <input type="number" name="idCliente" id="idCliente"/><br/><br/>
-	<h3 align="center">Datos a cambiar, si se dejan vacío se mantendrán los actuales</h3><br/>
-	Usuario: <input type="text" name="usuario" id="usuario"/><br/>
-	Contraseña: <input type="text" name="password" id="password"/><br/>
-	Email: <input type="text" name="email" id="email"/><br/>
-	Teléfono: <input type="number" name="telefono" id="telefono"/><br/><br/>
-	Confirme contraseña del Administrador: <input type="password" name="pwdadmin" id="pwdadmin"/><h4 align="center" id="mensaje"></h4><br/><br/>
+	<h1 align="center"><span class="label label-primary">Modificaciones a clientes</span></h1><br/><br/>
+	<div class="container contenedor">
+		<div class="form-group">
+			<label for="idCliente">Id del Cliente al que se le realizará los cambios:</label>
+			<input type="number" name="idCliente" id="idCliente" class="form-control"/><br/>
+		</div>
+		<h3 align="center"><span class="label label-info">Datos a cambiar, si se dejan vacío se mantendrán los actuales</span></h3><br/>
+		<div class="form-group">
+			<label for="usuario">Usuario: </label><input type="text" name="usuario" id="usuario" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label for="password">Contraseña: </label><input type="text" name="password" id="password" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label for="email">Email: </label><input type="text" name="email" id="email" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label for="telefono">Teléfono: </label><input type="number" name="telefono" id="telefono" class="form-control"/><br/>
+		</div>
+		<div class="form-group">
+			<label for="pwdadmin">Confirme contraseña del Administrador: </label>
+			<input type="password" name="pwdadmin" id="pwdadmin" class="form-control"/>
+		</div><br/>
+		<h3><span class="label label-danger" id="mensaje"></span></h3><br/><br/>		
+		<input type="button" onclick="cambiar();" value="Cambiar" class="btn btn-primary btn-md"/><br/><br/>
 		
-	<input type="button" onclick="cambiar();" value="Cambiar"/><br/><br/><br/>
-	
-	<a href="toMenuAdmin">Volver</a>
+		<h3><span class="label label-info"><a href="toMenuAdmin">Volver</a></span></h3>
+	</div>
 </body>
 </html>

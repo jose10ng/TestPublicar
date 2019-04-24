@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Insert title here</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	
@@ -13,10 +13,10 @@
 		
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<style type="text/css">
-		a,input{border-radius: 5px;border-color: red}
-		option{color: white;background: green}
-		a{color: orange;background: blue}
+	<style type="text/css">				
+		.contenedor{
+			max-width: 40%;
+		}
 	</style>
 	<script type="text/javascript">
 		function obligatorios() {
@@ -80,18 +80,38 @@
 		}
 	</script>
 </head>
-<body>
-	<h1 align="center" id="disp"></h1><br/><br/>
-	<form action="altaCliente" method="post" onsubmit="return comprobar();">
-		Usuario: <input type="text" name="usuario" id="usuario"/><br/><br/>
-		Contraseña: <input type="text" name="password" id="password"/><br/><br/>
-		Confirmar Contraseña: <input type="text" name="confirmar" id="confirmar"/><br/><br/>
-		Email: <input type="text" name="email" id="email"/><br/><br/>
-		Teléfono: <input type="text" name="telefono" id="telefono"/><br/><br/><br/><br/>
-		<input type="submit" value="Guardar"/><br/><br/>
-		<a href="#" onclick="existe();">Comprobar disponibilidad</a>
-	</form><br/><br/><br/><br/>
-	<h1 align="center">${requestScope.registroNOK}</h1><br/><br/>
-	<a href="toMenu">Volver</a>	
+<body>	
+	<h1 align="center"><span class="label label-primary">Registro de Cliente</span></h1><br/><br/>
+	<div class="container contenedor">	
+		<form action="altaCliente" method="post" onsubmit="return comprobar();">
+			<div class="form-group">
+				<label for="usuario">Usuario: </label>
+				<input type="text" name="usuario" id="usuario" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="password">Contraseña: </label>
+				<input type="text" name="password" id="password" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="confirmar">Confirmar Contraseña: </label>
+				<input type="text" name="confirmar" id="confirmar" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="email">Email: </label>
+				<input type="text" name="email" id="email" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="telefono">Teléfono: </label>
+				<input type="text" name="telefono" id="telefono" class="form-control"/>
+			</div><br/>
+			<input type="submit" value="Guardar" class="btn btn-danger btn-md"><br/>
+			<h3><span class="label label-info"><a href="#" onclick="existe();">Comprobar disponibilidad</a></span></h3>
+		</form><br/><br/>
+		<h3 align="center">
+			<span class="label label-primary" id="disp"></span><br/><br/>
+			<span class="label label-danger">${requestScope.registroNOK}</span>
+		</h3><br/><br/>
+		<h3><span class="label label-info"><a href="toMenu">Volver</a></span></h3>
+	</div>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Insert title here</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	
@@ -51,12 +51,29 @@
 			}
 		}
 	</script>
+	<style type="text/css">		
+		.contenedor{
+			margin-left: 5%
+		}
+		table,tr,th,td{
+			border-radius: 20px;border-color: red
+		}
+		
+		td{
+			color: white;background: blue
+		}
+		table{
+			width: 90%
+		}
+	</style>
 </head>
 <body onload="inicio();">
 	<%Cliente c=(Cliente)session.getAttribute("cliente"); %>
-	<h3>Hola Usuario: <%=c.getUsuario() %></h3>
-	<h3>Id Cliente: <%=c.getIdCliente() %></h3>		
-	<h1 align="center">LIBROS</h1><br/>
+	<h3 class="contenedor">
+		<span class="label label-success">Hola Usuario: <%=c.getUsuario() %></span>
+		<span class="label label-default">Id Cliente: <%=c.getIdCliente() %></span>
+	</h3>		
+	<h1 align="center"><span class="label label-primary">LIBROS</span></h1><br/>
 	<%List<LibroDto> libros=(ArrayList<LibroDto>)request.getAttribute("libros");%>
 	<%if(libros!=null&&libros.size()!=0){ %>
 		<table align="center" border="1" width="80%">
@@ -73,21 +90,19 @@
 			<%} %>	
 		</table><br/><br/>
 	<%}else{ %>
-		<h1 align="center">No hay libros para este tema</h1>
+		<h3 align="center"><span class="label label-info">No hay libros para este tema</span></h3>
 	<%} %>
-	<a href="doTemas">Elija otro tema</a><br/><br/>
-	<h1 align="center">CESTA</h1><br/>
-	<div id="cesta">
-	</div>
-	<div id="volver">
-	</div><br/><br/>
+	<h3 class="contenedor"><span class="label label-default"><a href="doTemas">Elija otro tema</a></span></h3><br/><br/>
+	<h1 align="center"><span class="label label-primary">CESTA</span></h1><br/>
+	<div id="cesta"></div>
+	<h3><span id="volver" class="label label-danger"></span></h3><br/><br/>
 	<%String mens=(String)request.getAttribute("mensaje");
 	if(mens!=null){%>
-		<h3><%=mens %></h3>
+		<h3 align="center"><span class="label label-danger"><%=mens %></span></h3>
 	<%} %>
 	<form action="doComprar" method="post">
-		<input type="submit" value="Comprar">
+		<input type="submit" value="Comprar" class="btn btn-danger contenedor"/>
 	</form>
-	<h3><a href="doSalir">Cerrar Sesión</a></h3>
+	<h3 class="contenedor"><span class="label label-info"><a href="doSalir">Cerrar Sesión</a></span></h3>
 </body>
 </html>
