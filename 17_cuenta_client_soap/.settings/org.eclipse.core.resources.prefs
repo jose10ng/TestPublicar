@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/servicios/BancoWS.java=UTF-8
+encoding//src/servicios/BancoWSLocator.java=UTF-8
+encoding//src/servicios/ClienteDto.java=UTF-8
+encoding//src/servicios/CuentaDto.java=UTF-8
+encoding//src/servicios/MovimientoDto.java=UTF-8
+encoding//src/servicios/ServicioWSBanca.java=UTF-8
+encoding//src/servicios/ServicioWSBancaPortBindingStub.java=UTF-8

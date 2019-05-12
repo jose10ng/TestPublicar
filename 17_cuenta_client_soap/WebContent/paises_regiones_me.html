@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function paises(){
+		var url="http://services.groupkt.com/country/get/all";
+		var proxy="https://cors-anywhere.herokuapp.com/";
+		var urlFinal=proxy+url;
+		$.get(urlFinal,procesar);
+	}
+	
+	function regiones(){
+		var url="http://services.groupkt.com/state/get/"+$("#pais").val()+"/all";
+		var proxy="https://cors-anywhere.herokuapp.com/";
+		var urlFinal=proxy+url;
+		$.get(urlFinal,procesar2);
+	}
+	
+	function procesar(data){
+		$.each(data,function(){
+			//$("#pais").html()
+			$.each(this.result,function(){				
+				document.getElementById("pais").innerHTML+="<option value='"+this.alpha3_code+"'>"+this.name+"</option>";					
+				console.log(this.name);
+			})				
+		});
+	}
+	
+	function procesar2(data1){
+		$.each(data1,function(){
+			$("#regiones").empty();
+			$.each(this.result,function(){				
+				document.getElementById("regiones").innerHTML+="<option value='"+this.id+"'>"+this.name+"</option>";					
+				console.log(this.name);
+			})				
+		});
+	}
+
+
+</script>
+</head>
+<body onload="paises();">
+	Selecciona País: <select name="pais" id="pais" onchange="regiones();">
+			<option value="0">Elige país</option>	
+	</select><br/><br/>
+	
+	Selecciona Región: <select name="regiones" id="regiones">
+			<option value="0">Elige región</option>
+	</select><br/>
+
+</body>
+</html>

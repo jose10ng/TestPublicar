@@ -1,0 +1,69 @@
+package dtos;
+
+import java.io.Serializable;
+
+public class ClienteDto implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	private int dni;
+
+	private String direccion;
+
+	private String nombre;
+
+	private int telefono;
+	
+	private CuentaDto[] cuentaDtos;
+
+	public ClienteDto() {
+	}	
+
+	public ClienteDto(int dni, String direccion, String nombre, int telefono) {
+		super();
+		this.dni = dni;
+		this.direccion = direccion;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+
+	public int getDni() {
+		return this.dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+	public CuentaDto[] getCuentaDtos() {
+		return this.cuentaDtos;
+	}
+
+	public void setCuentaDtos(CuentaDto[] cuentaDtos) {
+		this.cuentaDtos = cuentaDtos;
+	}
+
+}

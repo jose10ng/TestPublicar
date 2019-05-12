@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="dtos.LibroDto, java.util.*,entidades.Cliente"%>
+    pageEncoding="ISO-8859-1" import="beans.Libro, java.util.*,beans.Cliente"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,26 +27,30 @@
 		}
 		function cesta(data) {
 			var libros=JSON.parse(data);
-			if(libros.session=="caducada"){
-				document.getElementById("volver").innerHTML="<h2>Sesión expirada....<a href='toLogin'>Volver al inicio</a></h2>";
+			if(libros.com=="errorCom"){
+				document.getElementById("volver").innerHTML="<h2>Error de comunicación con el servicio....<a href='toLogin'>Volver al inicio</a></h2>";
 			}else{
-				if(libros.length!=0){
-					var tabla="<table align='center' border='1' width='80%'>";
-					tabla+="<tr><th>Título</th><th>Autor</th><th>Precio</th><th>Páginas</th><th>Tema</th><th>Su elección</th></tr>";
-					libros.forEach(function(o,i){
-						tabla+="<tr>";
-						tabla+="<td>"+o.titulo+"</td>";
-						tabla+="<td>"+o.autor+"</td>";
-						tabla+="<td>"+o.precio+"</td>";
-						tabla+="<td>"+o.paginas+"</td>";
-						tabla+="<td>"+o.tema+"</td>";
-						tabla+="<td><a href='#' onclick='eliminar("+i+");'>Eliminar</a></td>";
-						tabla+="</tr>";
-					});
-					tabla+="</table>";
-					document.getElementById("cesta").innerHTML=tabla;
+				if(libros.session=="caducada"){
+					document.getElementById("volver").innerHTML="<h2>Sesión expirada....<a href='toLogin'>Volver al inicio</a></h2>";
 				}else{
-					document.getElementById("cesta").innerHTML="<h1 align='center'>Cesta vacía</h1>";
+					if(libros.length!=0){
+						var tabla="<table align='center' border='1' width='80%'>";
+						tabla+="<tr><th>Título</th><th>Autor</th><th>Precio</th><th>Páginas</th><th>Tema</th><th>Su elección</th></tr>";
+						libros.forEach(function(o,i){
+							tabla+="<tr>";
+							tabla+="<td>"+o.titulo+"</td>";
+							tabla+="<td>"+o.autor+"</td>";
+							tabla+="<td>"+o.precio+"</td>";
+							tabla+="<td>"+o.paginas+"</td>";
+							tabla+="<td>"+o.tema+"</td>";
+							tabla+="<td><a href='#' onclick='eliminar("+i+");'>Eliminar</a></td>";
+							tabla+="</tr>";
+						});
+						tabla+="</table>";
+						document.getElementById("cesta").innerHTML=tabla;
+					}else{
+						document.getElementById("cesta").innerHTML="<h1 align='center'>Cesta vacía</h1>";
+					}
 				}
 			}
 		}
@@ -74,11 +78,11 @@
 		<span class="label label-default">Id Cliente: <%=c.getIdCliente() %></span>
 	</h3>		
 	<h1 align="center"><span class="label label-primary">LIBROS</span></h1><br/>
-	<%List<LibroDto> libros=(ArrayList<LibroDto>)request.getAttribute("libros");%>
+	<%List<Libro> libros=(ArrayList<Libro>)request.getAttribute("libros");%>
 	<%if(libros!=null&&libros.size()!=0){ %>
 		<table align="center" border="1" width="80%">
 			<tr><th>Título</th><th>Autor</th><th>Precio</th><th>Páginas</th><th>Tema</th><th>Su elección</th></tr>
-			<%for(LibroDto l:libros){ %>
+			<%for(Libro l:libros){ %>
 				<tr>
 					<td><%=l.getTitulo() %></td>
 					<td><%=l.getAutor() %></td>
@@ -93,6 +97,7 @@
 		<h3 align="center"><span class="label label-info">No hay libros para este tema</span></h3>
 	<%} %>
 	<h3 class="contenedor"><span class="label label-default"><a href="doTemas">Elija otro tema</a></span></h3><br/><br/>
+	<h3><span class="label label-danger">${requestScope.com}</span></h3><br/>
 	<h1 align="center"><span class="label label-primary">CESTA</span></h1><br/>
 	<div id="cesta"></div>
 	<h3><span id="volver" class="label label-danger"></span></h3><br/><br/>

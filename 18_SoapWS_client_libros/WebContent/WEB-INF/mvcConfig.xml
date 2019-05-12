@@ -6,11 +6,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	
-	<context:component-scan base-package="controlador, controlador.adm"/>	
+	<context:component-scan base-package="controlador, controlador.adm, modelo.service"/>	
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
+
 </beans>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<style type="text/css">
+		.a{
+			font: bold;
+			color: pink;
+			background: green;
+			border-radius: 20px;
+		}
+					
+		.contenedor{
+			max-width: 40%;
+		}
+		
+	</style>
+	
+</h:head> 
+<h:body>
+	<h1 align="center" class="a">Gestor de Cuentas</h1><br/><br/><br/>
+	<div class="container contenedor">	
+		<h3 align="center">
+			<span class="label label-primary"><h:link value="Ingresar" outcome="ingreso"/></span><br/><br/>
+			<span class="label label-danger"><h:link value="Extracción" outcome="extraer"/></span><br/><br/>
+			<span class="label label-success"><h:link value="Transferencia" outcome="transferencia"/></span><br/><br/>
+			<h:form>
+				<span class="label label-info"><h:commandLink value="Movimientos" action="#{listaMovimientosBean.listaGen()}"/></span><br/><br/><br/>
+			</h:form>
+			<h:form>
+				<span class="label label-default"><h:commandLink value="Salir" action="#{salirBean.salida()}"/></span>
+			</h:form>
+		</h3>
+	</div>
+</h:body> 
+</html>

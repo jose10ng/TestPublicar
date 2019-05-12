@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+	
+	.contenedor{
+		max-width: 40%;
+	}
+	
+</style>
+</h:head> 
+<h:body>
+	<h1 align="center"><span class="label label-primary">Ingresar Dinero</span></h1><br/><br/><br/>
+	<div class="container contenedor">
+		<h:form>
+			<div class="form-group">			
+				<label for="cant">Introduzca Cantidad:</label>			
+				<h:inputText id="cant" class="form-control" value="#{ingresosBean.cantidad}" />			
+			</div>
+			<h:commandButton class="btn btn-primary btn-md" value="Ingresar" action="#{ingresosBean.ingresar()}"/>
+		</h:form>
+		<h2><span class="label label-info"><h:link class="label-info" value="Volver" outcome="menu"/></span></h2>
+	</div>
+</h:body> 
+</html>
