@@ -9,6 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="historico")
 @NamedQuery(name="Historico.findAll", query="SELECT h FROM Historico h")
 public class Historico implements Serializable {
 	private static final long serialVersionUID = 1L;

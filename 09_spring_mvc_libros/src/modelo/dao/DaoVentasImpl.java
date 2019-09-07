@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class DaoVentasImpl implements DaoVentas {
 		Venta v=new Venta();
 		v.setIdCliente(idCliente);
 		v.setIdLibro(isbn);
+		v.setFecha(Date.from(Instant.now()));
 		em.persist(v);
 	}
 	
